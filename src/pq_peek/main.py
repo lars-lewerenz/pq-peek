@@ -9,19 +9,22 @@ from rich.table import Table
 app = typer.Typer(help="A fast CLI tool to inspect Parquet files")
 console = Console()
 
+
 def get_scan(file_path: Path) -> pl.LazyFrame:
     verify_path(file_path)
     return pl.scan_parquet(file_path)
 
+
 def verify_path(file_path: Path):
     """
-    Verifies that the file exists and checks the correct ending 
+    Verifies that the file exists and checks the correct ending
     """
     if not file_path.exists():
         rprint(f"[bold red]Error:[/bold red] File was not found: '{file_path}'")
         raise typer.Exit(code=1)
     if file_path.suffix != ".parquet":
         rprint("[bold yellow]Warning:[/bold yellow] File does not end with '.parquet'")
+
 
 @app.command()
 def schema(file_path: Path):
@@ -43,8 +46,11 @@ def schema(file_path: Path):
         console.print(table)
         rprint(f"\n[green]Amount of columns:[/green] {len(schema)}")
     except Exception as failure:
-        rprint(f"[bold red]Failure while reading the parquet file:[/bold red] {failure}")
+        rprint(
+            f"[bold red]Failure while reading the parquet file:[/bold red] {failure}"
+        )
         raise typer.Exit(code=1)
+
 
 @app.command()
 def head(file_path: Path, n: int = typer.Option(5, help="Amount of rows")):
@@ -58,7 +64,7 @@ def head(file_path: Path, n: int = typer.Option(5, help="Amount of rows")):
         if df.is_empty():
             rprint("[yellow]File is empty.[/yellow]")
             return
-        
+
         table = Table(title=f"Preview {file_path.name} ({n} rows)")
 
         for column in df.columns:
@@ -67,12 +73,13 @@ def head(file_path: Path, n: int = typer.Option(5, help="Amount of rows")):
         for row in df.iter_rows():
             str_row = [str(x) for x in row]
             table.add_row(*str_row)
-        
+
         console.print(table)
     except Exception as failure:
-        rprint(f"[bold red]Failure while reading the parquet file:[/bold red] {failure}")
+        rprint(
+            f"[bold red]Failure while reading the parquet file:[/bold red] {failure}"
+        )
         raise typer.Exit(code=1)
-
 
 
 @app.command()
