@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import polars as pl
 
@@ -12,9 +14,9 @@ def create_dummy():
         "description": ["Product description placeholder"] * row_count
     })
 
-    file_name = "data.parquet"
-    df.write_parquet(file_name)
-    print(f"Created '{file_name}' with {row_count} rows.")
+    file_path = Path(__file__).with_name("data.parquet")
+    df.write_parquet(file_path)
+    print(f"Created '{file_path}' with {row_count} rows.")
 
 if __name__ == "__main__":
     create_dummy()
