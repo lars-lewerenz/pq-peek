@@ -1,0 +1,24 @@
+[project]
+name = "pq-peek"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Lars Lewerenz", email = "git.lars.lewerenz@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=1.37.1",
+    "rich>=14.3.1",
+    "typer>=0.21.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.21,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.14.14",
+]
