@@ -165,7 +165,6 @@ name = "pq-peek"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "numpy" },
     { name = "polars" },
     { name = "rich" },
     { name = "typer" },
@@ -173,13 +172,13 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "numpy" },
     { name = "pytest" },
     { name = "ruff" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "numpy", specifier = ">=2.4.1" },
     { name = "polars", specifier = ">=1.37.1" },
     { name = "rich", specifier = ">=14.3.1" },
     { name = "typer", specifier = ">=0.21.1" },
@@ -187,6 +186,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "numpy", specifier = ">=2.4.1" },
     { name = "pytest", specifier = ">=9.0.2" },
     { name = "ruff", specifier = ">=0.14.14" },
 ]
