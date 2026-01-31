@@ -8,6 +8,7 @@ jobs:
   pypi-publish:
     name: Build and publish Python distribution
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       # IMPORTANT: Essential for OpenID Connect (if using trusted publishing)
       id-token: write
