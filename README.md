@@ -6,7 +6,7 @@ Built with *Polars*, *Typer*, and *Rich*. Managed via *uv*.
 ## Install (uv)
 
 ```bash
-uv pip install pq-peek
+uv pip install --system pq-peek
 ```
 
 ## CLI usage
