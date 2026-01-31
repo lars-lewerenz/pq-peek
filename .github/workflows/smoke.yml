@@ -1,0 +1,37 @@
+name: CLI smoke test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cli-smoke:
+    name: Run pq-peek on sample data
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        # Keeps tooling aligned with local workflow
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Add uv to PATH
+        # Ensures uv is available in later steps
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Install project
+        # Ensures pq-peek entry point is built from current code
+        run: uv pip install --system .
+
+      - name: Run CLI smoke checks
+        run: |
+          pq-peek schema examples/data.parquet
+          pq-peek head examples/data.parquet --n 3
+          pq-peek stats examples/data.parquet
