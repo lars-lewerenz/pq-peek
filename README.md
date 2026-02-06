@@ -24,6 +24,25 @@ pq-peek stats /path/to/file.parquet
 
 ## Sample output
 
+Schema:
+
+```text
+   Schema: data.parquet
+┏━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Column name  ┃ Type    ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ id           │ Int64   │
+│ price        │ Float64 │
+│ category     │ String  │
+│ is_available │ Boolean │
+│ description  │ String  │
+└──────────────┴─────────┘
+
+Amount of columns: 5
+```
+
+Head:
+
 ```text
                          Preview data.parquet (3 rows)
 ┏━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -36,6 +55,23 @@ pq-peek stats /path/to/file.parquet
 │ 2  │ 51.69244000425412  │ Books    │ False        │ Product description      │
 │    │                    │          │              │ placeholder              │
 └────┴────────────────────┴──────────┴──────────────┴──────────────────────────┘
+```
+
+Stats:
+
+```text
+shape: (9, 6)
+┌────────────┬───────────────┬───────────┬─────────────┬──────────────┬──────────────────────────┐
+│ statistic  ┆ id            ┆ price     ┆ category    ┆ is_available ┆ description              │
+│ ---        ┆ ---           ┆ ---       ┆ ---         ┆ ---          ┆ ---                      │
+│ str        ┆ f64           ┆ f64       ┆ str         ┆ f64          ┆ str                      │
+╞════════════╪═══════════════╪═══════════╪═════════════╪══════════════╪══════════════════════════╡
+│ count      ┆ 1e6           ┆ 1e6       ┆ 1000000     ┆ 1e6          ┆ 1000000                  │
+│ null_count ┆ 0.0           ┆ 0.0       ┆ 0           ┆ 0.0          ┆ 0                        │
+│ mean       ┆ 499999.5      ┆ 49.997178 ┆ null        ┆ 0.499979     ┆ null                     │
+│ ...        ┆ ...           ┆ ...       ┆ ...         ┆ ...          ┆ ...                      │
+│ max        ┆ 9.99999e5     ┆ 99.999956 ┆ Electronics ┆ 1.0          ┆ Product description ...  │
+└────────────┴───────────────┴───────────┴─────────────┴──────────────┴──────────────────────────┘
 ```
 
 ## Module usage
